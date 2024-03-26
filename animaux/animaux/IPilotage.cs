@@ -1,4 +1,4 @@
 ﻿public interface IPilotage
 {
-    public void Move2();
+    void Move2();
 }
