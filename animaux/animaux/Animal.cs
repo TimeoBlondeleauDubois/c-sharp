@@ -1,6 +1,7 @@
 ﻿public abstract class Animal
 {
-    public string Name { get; private set; }
+    private string _name;
+    public string Name { get { return _name; } protected set { _name = value; } }
 
     public virtual void Move()
     {

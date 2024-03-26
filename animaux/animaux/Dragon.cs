@@ -1,4 +1,4 @@
-﻿class Dragon : Animal
+﻿class Dragon : Animal, IPilotage
 {
     public override void Move()
     {
@@ -10,6 +10,11 @@
         Console.WriteLine("Le dragon dort.");
     }
 
+    public void Move2()
+    {
+        Console.WriteLine("Le dragon bouge depuis pilotage.");
+    }
+
     public Dragon()
     {
         Name = "Pas de Prénom";
@@ -19,4 +24,6 @@
     {
         Name = name;
     }
+
+
 }

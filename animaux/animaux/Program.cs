@@ -4,9 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("sa marche pas");
-        Dragon dragon = new Dragon("test2");
-        Console.WriteLine(dragon.Name);
+        Dragon dragon = new Dragon("test");
+        dragon.Move2();
+        dragon.Move();
     }
 
 }
