@@ -1,37 +1,12 @@
 ﻿using System;
 
-class Animaux
+class Program
 {
     static void Main(string[] args)
     {
-        Animal lion = new Animal();
-
-        lion.Move();
-        lion.Sleep();
+        Console.WriteLine("sa marche pas");
+        Dragon dragon = new Dragon("test2");
+        Console.WriteLine(dragon.Name);
     }
 
-    public class Animal
-    {
-        public string Name;
-
-        public void Move()
-        {
-            Console.WriteLine("Moove");
-        }
-
-        public void Sleep()
-        {
-            Console.WriteLine("Sleep");
-        }
-
-        public Animal()
-        {
-            Name = "Pas de Prénom";
-        }
-
-        public Animal(string name)
-        {
-            Name = name;
-        }
-    }
 }
