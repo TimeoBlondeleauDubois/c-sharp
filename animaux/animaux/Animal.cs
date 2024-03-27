@@ -1,19 +1,37 @@
-﻿public abstract class Animal
+namespace cesiAnimal.animal
 {
-    private string _name;
-    public string Name { get { return _name; } protected set { _name = value; } }
-
-    public virtual void Move()
+    public abstract class Animal
     {
-        Console.WriteLine("Moove");
+        public static int animalCount;
+
+        public int id;
+        public String Name { get; protected set; }
+        public int Rarity { get; protected set; }
+
+        public void move()
+        {
+            if (Name == null)
+            {
+                Console.WriteLine("invisible animal move");
+
+                return;
+            }
+
+            Console.WriteLine(Name + " move");
+        }
+
+        public void sleep()
+        {
+            if (Name == null)
+            {
+                Console.WriteLine("invisible animal sleep");
+
+                return;
+            }
+
+            Console.WriteLine(Name + " sleep");
+        }
+
+        public abstract void cry();
     }
-
-    public void Sleep()
-    {
-        Console.WriteLine("Sleep");
-    }
-
-
-
 }
-      
