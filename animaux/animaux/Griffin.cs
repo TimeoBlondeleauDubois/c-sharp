@@ -1,25 +1,28 @@
 ﻿using System;
-class Griffin : Animal
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cesiAnimal.animal
 {
-
-    public override void Move()
+    internal class Griffin : Animal
     {
-        Console.WriteLine("le griffon bouge.");
-    }
+        public Griffin()
+        {
+            this.id = Animal.animalCount++;
+            this.Name = "Griffin";
+            this.Rarity = 25;
+        }
 
-    public new void Sleep()
-    {
-        Console.WriteLine("Le griffon dort.");
-    }
+        public override void cry()
+        {
+            Console.WriteLine("Anini !");
+        }
 
-    public Griffin()
-    {
-        Name = "Pas de Prénom";
+        public new void sleep()
+        {
+            Console.WriteLine(this.Name + " strange sleeping");
+        }
     }
-
-    public Griffin(string name)
-    {
-        Name = name;
-    }
-
 }
