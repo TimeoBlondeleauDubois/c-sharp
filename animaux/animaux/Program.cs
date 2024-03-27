@@ -1,37 +1,22 @@
 ﻿using System;
 
-class Animaux
+class Program
 {
     static void Main(string[] args)
     {
-        Animal lion = new Animal();
+        List<Animal> dogs = new List<Animal>();
 
-        lion.Move();
-        lion.Sleep();
-    }
+        dogs.Add(new Dog("Snow"));
+        dogs.Add(new Dog("Rex"));
+        dogs.Add(new Dog("Buddy"));
+        dogs.Add(new Dog("Max"));
+        dogs.Add(new Dog("Alexandre"));
 
-    public class Animal
-    {
-        public string Name;
+        var testDogs = from dog in dogs where dog.Name != "Snow" select dog;
 
-        public void Move()
+        foreach (Dog testDog in testDogs)
         {
-            Console.WriteLine("Moove");
-        }
-
-        public void Sleep()
-        {
-            Console.WriteLine("Sleep");
-        }
-
-        public Animal()
-        {
-            Name = "Pas de Prénom";
-        }
-
-        public Animal(string name)
-        {
-            Name = name;
+            Console.WriteLine(testDog.Name);
         }
     }
 }
