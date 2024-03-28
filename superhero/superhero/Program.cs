@@ -1,5 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using superhero.Data;
+using Cesi__Hero.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +8,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<DataContext>();
+builder.Services.AddScoped<IHeroServices,HeroServices>();
 
 var app = builder.Build();
 
