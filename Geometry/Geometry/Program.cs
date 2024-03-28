@@ -1,37 +1,26 @@
-﻿using System;
-
-class ProgramGeometry
+﻿class ProgramGeometry
 {
     static void Main(string[] args)
     {
         Rectangle rectangle = new Rectangle { Height = 2, Width = 2 };
         Circle circle = new Circle { Radius = 2 };
         Triangle triangle = new Triangle { Base = 1, Height = 1 };
-        object[] arrObjects = { rectangle, circle, triangle };
-        Console.WriteLine("Surface totale : " + TotalArea(arrObjects));
+        Square square = new Square { SideLength = 2 };
+        Shape[] arrShapes = { rectangle, circle, triangle, square };
+        AreaCalculator calculator = new AreaCalculator();
+        Console.WriteLine("Surface totale : " + calculator.TotalArea(arrShapes));
     }
 
-    public static double TotalArea(object[] arrObjects)
+    public class AreaCalculator
     {
-        double area = 0;
-        foreach (var obj in arrObjects)
+        public double TotalArea(Shape[] arrShapes)
         {
-            if (obj is Rectangle)
+            double area = 0;
+            foreach (var shape in arrShapes)
             {
-                Rectangle objRectangle = (Rectangle)obj;
-                area += objRectangle.Height * objRectangle.Width;
+                area += shape.Area();
             }
-            else if (obj is Circle)
-            {
-                Circle objCircle = (Circle)obj;
-                area += objCircle.Radius * objCircle.Radius * Math.PI;
-            }
-            else if (obj is Triangle)
-            {
-                Triangle objTriangle = (Triangle)obj;
-                area += 0.5 * objTriangle.Base * objTriangle.Height;
-            }
+            return area;
         }
-        return area;
     }
 }

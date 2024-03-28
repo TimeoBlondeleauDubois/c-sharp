@@ -1,27 +1,51 @@
-﻿class Dragon : Animal, IPilotage
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
+using cesiAnimal.vehicle;
+
+namespace cesiAnimal.animal
 {
-    public override void Move()
+    internal class Dragon : Animal, Drivable
     {
-        Console.WriteLine("Le dragon bouge.");
-    }
+        public Dragon()
+        {
+            this.id = Animal.animalCount++;
+            this.Name = "Dragon";
+            this.Rarity = 10;
+        }
 
-    public new void Sleep()
-    {
-        Console.WriteLine("Le dragon dort.");
-    }
+        public override void cry()
+        {
+            Console.WriteLine("Grrrr grr !");
+        }
 
-    public void Move2()
-    {
-        Console.WriteLine("Le dragon bouge depuis pilotage.");
-    }
+        public void eat(Animal animal)
+        {
+            Console.WriteLine(this.Name + " eat " + animal.Name);
+        }
 
-    public Dragon()
-    {
-        Name = "Pas de Prénom";
-    }
+        public void eat(Vehicle vehicle)
+        {
+            Console.WriteLine(this.Name + " eat " + vehicle.Name + " vehicle");
+        }
 
-    public Dragon(string name)
-    {
-        Name = name;
+        public void mount(Animal animal)
+        {
+            Console.WriteLine(animal.Name + " mount on dragon");
+        }
+
+        public new void move()
+        {
+            Console.WriteLine("move with animal");
+        }
+
+        public void unmount(Animal animal)
+        {
+            Console.WriteLine(animal.Name + " unmount on dragon");
+
+        }
     }
 }
