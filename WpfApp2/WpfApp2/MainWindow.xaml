@@ -1,0 +1,14 @@
+﻿<Window x:Class="VotreApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Météo App" Height="350" Width="525">
+    <Grid>
+        <!-- Interface utilisateur, par exemple : -->
+        <StackPanel Margin="10">
+            <TextBlock Text="Ville:"/>
+            <TextBox x:Name="txtCity" Margin="0 5"/>
+            <Button Content="Obtenir la météo" Click="btnGetWeather_Click" Margin="0 10"/>
+            <TextBlock x:Name="txtWeatherResult" TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</Window>
