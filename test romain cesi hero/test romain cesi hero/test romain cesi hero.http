@@ -1,0 +1,6 @@
+@test_romain_cesi_hero_HostAddress = http://localhost:5213
+
+GET {{test_romain_cesi_hero_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
