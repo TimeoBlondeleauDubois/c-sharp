@@ -1,6 +1,6 @@
-﻿namespace ASPNET.Models.Entities
+﻿namespace ASPNET.Models.ViewModels
 {
-    public class Student
+    public class AddStudentViewModel
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
