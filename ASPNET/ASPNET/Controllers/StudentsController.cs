@@ -1,20 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-using ASPNET.Data;
-using ASPNET.Models.ViewModels;
 using ASPNET.Models.Entities;
+using ASPNET.Services;
 
 
 namespace ASPNET.Controllers
 {
     public class StudentsController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly IServiceStudent _ServiceStudent;
 
-        public StudentsController(ApplicationDbContext dbContext)
+        public StudentsController(IServiceStudent ServiceStudent)
         {
-            this.dbContext = dbContext;
+            _ServiceStudent = ServiceStudent;
         }
 
         [HttpGet]
@@ -25,55 +22,44 @@ namespace ASPNET.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(AddStudentViewModel addStudentViewModel)
+        public async Task<IActionResult> Add(Student student)
         {
-            var student = new Student
-            {
-                Name = addStudentViewModel.Name,
-                Email = addStudentViewModel.Email,
-                Phone = addStudentViewModel.Phone,
-                Subscribed = addStudentViewModel.Subscribed,
-            };
+            await _ServiceStudent.CreateStudentAsync(student);
 
-            await dbContext.Students.AddAsync(student);
-
-            await dbContext.SaveChangesAsync();
-
-            return View();
+            return RedirectToAction(nameof (List));
         }
 
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var students = await dbContext.Students.ToListAsync();
+            var students = await _ServiceStudent.GetAllStudentsAsync();
 
             return View(students);
         }
 
         [HttpGet]
 
+        public async Task<IActionResult> GetStudentByIdAsync(Guid id)
+        {
+            var students = await _ServiceStudent.GetStudentByIdAsync(id);
+
+            return View();
+		}
+
+        [HttpGet]
+
         public async Task<IActionResult> Edit(Guid id)
         {
-            var student = await dbContext.Students.FindAsync(id);
+            var student = await _ServiceStudent.GetStudentByIdAsync(id);
 
             return View(student);
-		}
+        }
 
         [HttpPost]
 
         public async Task<IActionResult> Edit(Student studentViewModel)
         {
-            var student = await dbContext.Students.FindAsync(studentViewModel.Id);
-
-            if (student is not null)
-            {
-                student.Name = studentViewModel.Name;
-                student.Email = studentViewModel.Email;
-                student.Phone = studentViewModel.Phone;
-                student.Subscribed = studentViewModel.Subscribed;
-
-                await dbContext.SaveChangesAsync();
-            }
+            var student = await _ServiceStudent.UpdateStudentAsync(studentViewModel);
 
             return RedirectToAction("List", "Students");
         }
@@ -82,16 +68,9 @@ namespace ASPNET.Controllers
 
 		public async Task<IActionResult> Delete(Guid id)
 		{
-			var student = await dbContext.Students.FindAsync(id);
+            var student = await _ServiceStudent.DeleteStudentAsync(id);
 
-			if (student is not null)
-			{
-				dbContext.Students.Remove(student);
-
-				await dbContext.SaveChangesAsync();
-			}
-
-			return RedirectToAction("List", "Students");
+            return RedirectToAction("List", "Students");
 		}
 	}
 }
