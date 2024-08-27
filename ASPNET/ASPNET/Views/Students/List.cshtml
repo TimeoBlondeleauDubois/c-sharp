@@ -10,4 +10,6 @@
 		<p>@Html.DisplayFor(modelItem => student.Phone)</p>
 		<p>@Html.DisplayFor(modelItem => student.Subscribed)</p>
 	</div>
+
+	<a class="btn btn-primary" asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">Edit</a>
 }

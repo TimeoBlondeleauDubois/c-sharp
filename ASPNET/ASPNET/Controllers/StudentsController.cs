@@ -58,5 +58,40 @@ namespace ASPNET.Controllers
 
             return View(student);
 		}
-    }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Edit(Student studentViewModel)
+        {
+            var student = await dbContext.Students.FindAsync(studentViewModel.Id);
+
+            if (student is not null)
+            {
+                student.Name = studentViewModel.Name;
+                student.Email = studentViewModel.Email;
+                student.Phone = studentViewModel.Phone;
+                student.Subscribed = studentViewModel.Subscribed;
+
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("List", "Students");
+        }
+
+        [HttpPost]
+
+		public async Task<IActionResult> Delete(Guid id)
+		{
+			var student = await dbContext.Students.FindAsync(id);
+
+			if (student is not null)
+			{
+				dbContext.Students.Remove(student);
+
+				await dbContext.SaveChangesAsync();
+			}
+
+			return RedirectToAction("List", "Students");
+		}
+	}
 }
