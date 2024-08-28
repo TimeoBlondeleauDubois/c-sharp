@@ -17,7 +17,7 @@ public class FilmServices : IFilmServices
         return await _context.Films.ToListAsync();
     }
 
-    public async Task<Film> GetFilmByIdAsync(Guid id)
+    public async Task<Film> GetFilmByIdAsync(int id)
     {
         return await _context.Films.FindAsync(id);
     }
@@ -36,7 +36,7 @@ public class FilmServices : IFilmServices
         return Film;
     }
 
-    public async Task<Film> DeleteFilmAsync(Guid id)
+    public async Task<Film> DeleteFilmAsync(int id)
     {
         var Film = await _context.Films.FindAsync(id);
         _context.Films.Remove(Film);

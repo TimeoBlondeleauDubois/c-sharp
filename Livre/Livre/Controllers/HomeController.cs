@@ -28,7 +28,12 @@ namespace Livre.Controllers
 			return View();
 		}
 
-		public IActionResult Add()
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult Add()
         {
             return View();
         }

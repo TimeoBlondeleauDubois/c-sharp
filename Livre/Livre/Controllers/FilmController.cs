@@ -29,23 +29,23 @@ public class FilmController : Controller
     [HttpGet]
     public async Task<IActionResult> List()
     {
-        var students = await _ServiceFilm.GetAllFilmsAsync();
+        var Film = await _ServiceFilm.GetAllFilmsAsync();
 
-        return View(students);
+        return View(Film);
     }
 
     [HttpGet]
 
-    public async Task<IActionResult> GetStudentByIdAsync(Guid id)
+    public async Task<IActionResult> GetStudentByIdAsync(int id)
     {
-        var students = await _ServiceFilm.GetFilmByIdAsync(id);
+        var Film = await _ServiceFilm.GetFilmByIdAsync(id);
 
-        return View();
+        return View(Film);
     }
 
     [HttpGet]
 
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Edit(int id)
     {
         var student = await _ServiceFilm.GetFilmByIdAsync(id);
 
@@ -58,15 +58,15 @@ public class FilmController : Controller
     {
         var student = await _ServiceFilm.UpdateFilmAsync(studentViewModel);
 
-        return RedirectToAction("List", "Students");
+        return RedirectToAction("List", "Film");
     }
 
     [HttpPost]
 
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(int id)
     {
         var student = await _ServiceFilm.DeleteFilmAsync(id);
 
-        return RedirectToAction("List", "Students");
+        return RedirectToAction("List", "Film");
     }
 }
