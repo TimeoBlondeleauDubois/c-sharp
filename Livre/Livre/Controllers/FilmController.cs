@@ -1,25 +1,17 @@
-﻿using Livre.Models.Entities;
+﻿using ASPNET.Services;
+using Livre.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 public class FilmController : Controller
 {
-    private readonly IFilmServices _filmServices;
+    private readonly IFilmServices _ServiceFilm;
 
     public FilmController(IFilmServices filmServices)
     {
-        _filmServices = filmServices;
+        _ServiceFilm = filmServices;
     }
 
     [HttpGet]
-
-    public async Task<IActionResult> Index()
-    {
-        var films = await _filmServices.GetFilms();
-        return View(films);
-    }
-
-    [HttpGet]
-
     public IActionResult Add()
     {
         return View();
@@ -29,55 +21,52 @@ public class FilmController : Controller
 
     public async Task<IActionResult> Add(Film film)
     {
-        if (ModelState.IsValid)
-        {
-            await _filmServices.AddFilm(film);
-            return RedirectToAction("Index");
-        }
-        return View(film);
+        await _ServiceFilm.CreateFilmAsync(film);
+
+        return RedirectToAction(nameof(List));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> List()
+    {
+        var students = await _ServiceFilm.GetAllFilmsAsync();
+
+        return View(students);
     }
 
     [HttpGet]
 
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> GetStudentByIdAsync(Guid id)
     {
-        var film = await _filmServices.GetFilm(id);
-        if (film == null)
-        {
-            return NotFound();
-        }
-        return View(film);
-    }
+        var students = await _ServiceFilm.GetFilmByIdAsync(id);
 
-    [HttpPost]
-
-    public async Task<IActionResult> Edit(Film film)
-    {
-        if (ModelState.IsValid)
-        {
-            await _filmServices.UpdateFilm(film);
-            return RedirectToAction("Index");
-        }
-        return View(film);
+        return View();
     }
 
     [HttpGet]
 
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Edit(Guid id)
     {
-        var film = await _filmServices.GetFilm(id);
-        if (film == null)
-        {
-            return NotFound();
-        }
-        return View(film);
+        var student = await _ServiceFilm.GetFilmByIdAsync(id);
+
+        return View(student);
     }
 
     [HttpPost]
 
-    public async Task<IActionResult> Delete(Film film)
+    public async Task<IActionResult> Edit(Film studentViewModel)
     {
-        await _filmServices.DeleteFilm(film.Id);
-        return RedirectToAction("Index");
+        var student = await _ServiceFilm.UpdateFilmAsync(studentViewModel);
+
+        return RedirectToAction("List", "Students");
+    }
+
+    [HttpPost]
+
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var student = await _ServiceFilm.DeleteFilmAsync(id);
+
+        return RedirectToAction("List", "Students");
     }
 }

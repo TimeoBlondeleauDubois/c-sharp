@@ -1,4 +1,5 @@
-﻿using Livre.Data;
+﻿using ASPNET.Services;
+using Livre.Data;
 using Livre.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,40 +12,35 @@ public class FilmServices : IFilmServices
         _context = context;
     }
 
-    public async Task<IEnumerable<Film>> GetFilms()
+    public async Task<IEnumerable<Film>> GetAllFilmsAsync()
     {
         return await _context.Films.ToListAsync();
     }
 
-    public async Task<Film> GetFilm(int id)
+    public async Task<Film> GetFilmByIdAsync(Guid id)
     {
         return await _context.Films.FindAsync(id);
     }
 
-    public async Task<Film> AddFilm(Film film)
+    public async Task<Film> CreateFilmAsync(Film Film)
     {
-        _context.Films.Add(film);
+        await _context.Films.AddAsync(Film);
         await _context.SaveChangesAsync();
-        return film;
+        return Film;
     }
 
-    public async Task<Film> UpdateFilm(Film film)
+    public async Task<Film> UpdateFilmAsync(Film Film)
     {
-        _context.Entry(film).State = EntityState.Modified;
+        _context.Films.Update(Film);
         await _context.SaveChangesAsync();
-        return film;
+        return Film;
     }
 
-    public async Task<Film> DeleteFilm(int id)
+    public async Task<Film> DeleteFilmAsync(Guid id)
     {
-        var film = await _context.Films.FindAsync(id);
-        if (film == null)
-        {
-            return null;
-        }
-
-        _context.Films.Remove(film);
+        var Film = await _context.Films.FindAsync(id);
+        _context.Films.Remove(Film);
         await _context.SaveChangesAsync();
-        return film;
+        return Film;
     }
 }

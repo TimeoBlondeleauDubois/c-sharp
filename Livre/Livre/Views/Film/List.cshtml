@@ -1,0 +1,15 @@
+﻿@model List<Livre.Models.Entities.Film>
+@{
+}
+
+@foreach (var Livre in Model)
+{
+	<div class="mt-3">
+		<h3>@Html.DisplayFor(modelItem => Livre.Titre)</h3>
+		<p>@Html.DisplayFor(modelItem => Livre.Realisateur)</p>
+		<p>@Html.DisplayFor(modelItem => Livre.Annee)</p>
+		<p>@Html.DisplayFor(modelItem => Livre.Genre)</p>
+	</div>
+
+	<a class="btn btn-primary" asp-controller="Livre" asp-action="Edit" asp-route-id="@Livre.Id">Edit</a>
+}

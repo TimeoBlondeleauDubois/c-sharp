@@ -1,3 +1,4 @@
+using ASPNET.Services;
 using Livre.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<FilmContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IFilmServices, FilmServices>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
