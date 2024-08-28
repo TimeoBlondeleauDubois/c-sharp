@@ -6,30 +6,39 @@
 
 @model Livre.Models.Entities.Film
 
-<h1>Add Student</h1>
+<h1>Add Film</h1>
 
-<form method="post">
-    <div class="mt-3">
-        <label class="form-label">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre" />
-    </div>
+@if (User.IsInRole("Administrateur"))
+{
 
-    <div class="mt-3">
-        <label class="form-label">Realisateur</label>
-        <input type="text" class="form-control" asp-for="Realisateur" />
-    </div>
+    <form method="post">
+        <div class="mt-3">
+            <label class="form-label">Titre</label>
+            <input type="text" class="form-control" asp-for="Titre" />
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Annee</label>
-        <input type="text" class="form-control" asp-for="Annee" />
-    </div>
+        <div class="mt-3">
+            <label class="form-label">Realisateur</label>
+            <input type="text" class="form-control" asp-for="Realisateur" />
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Genre</label>
-        <input type="text" class="form-control" asp-for="Genre" />
-    </div>
+        <div class="mt-3">
+            <label class="form-label">Annee</label>
+            <input type="text" class="form-control" asp-for="Annee" />
+        </div>
 
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Add Film</button>
-    </div>
-</form>
+        <div class="mt-3">
+            <label class="form-label">Genre</label>
+            <input type="text" class="form-control" asp-for="Genre" />
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Add Film</button>
+        </div>
+    </form>
+}
+
+else
+{
+    <p>Vous ne pouvez pas acceder a cette page.</p>
+}
