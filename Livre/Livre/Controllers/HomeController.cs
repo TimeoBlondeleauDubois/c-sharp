@@ -1,9 +1,8 @@
-using ASPNET.Models;
+using Livre.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Security.Principal;
 
-namespace ASPNET.Controllers
+namespace Livre.Controllers
 {
     public class HomeController : Controller
     {
@@ -24,16 +23,10 @@ namespace ASPNET.Controllers
             return View();
         }
 
-        public IActionResult List()
+        public IActionResult Add()
         {
             return View();
         }
-
-        public IActionResult Delete()
-        {
-            return View();
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
